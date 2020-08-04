@@ -1,0 +1,3 @@
+# Blog
+This is a blog based website made for college based technical and non-technical teams that have entirely new roster after two to three years and need to pass on the progress that was achived by previous team. Through this website the teams will be able to pass various information about certain areas in the team to the next gen members to refer to.
+For example in a technical team like a m-Baja team for which it is designed it stores all the tips and tricks about various subsyste, gathered over ages of team working and also it has section to see team journey that makes an reference point about deadlines to next teams. The important feature it has is that only members can access it and only the admin is able to create an account.
