@@ -1,0 +1,67 @@
+{% extends "blog/base.html" %}
+
+{% block title %} <title>Search</title>{% endblock %}
+{% block content %}
+<br>
+    <div class="row ">
+    	<div class="col-md-8 blog-main"> 
+    		{% if posts|length < 1 %}
+					<p>No Search Result</p>
+					Your search - <b>{{ search_result }}</b> - did not match any documents <br>
+
+					Suggestions:
+					<ul>
+						<li>Make sure that all words are spelled correctly.</li>
+						<li>Try different keywords.</li>
+						<li>Try more general keywords.</li>
+					</ul>
+
+			{% endif %}
+			{% for post in posts%}
+				<div class="blog-post">
+					
+					<h2 class="blog-post-title"><a href="{% url 'post-detail' post.id %}">{{post.title}}</a></h2>
+
+					<p class="blog-post-meta">{{post.date_posted|date:'F d, Y'}} <button class="btn btn-secondary" id="blog-author-button"><a  id="blog-author" href="{% url 'user-posts' post.author.username %}">{{ post.author }} <img class="rounded-circle" src="{{ post.author.profile.image.url }}" height="30" width="30"></a></button><span class="hide">
+						to be completed later 
+					</span>
+					</p>
+					<div class="content1">
+						<p>{{ post.content|safe }}</p>
+					</div>
+					<div class="text-right">
+					    <a class = "btn btn-secondary btn-sm mt-1 mb-1" id="topic" href="{% url 'post-category' post.category %}">{{ post.category }}</a>
+					</div>
+				    
+			    </div>
+		
+
+			{% endfor %}
+			{% if is_paginated %}
+			    {% if page_obj.has_previous %}
+			        <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
+			        <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number}}">Previous</a>
+			    {% endif %}
+
+			    {% if page_obj.has_next %}
+			        <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}"  >Next</a>
+			        <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+			    {% endif %}
+			{% endif %}
+	    </div>
+	    <aside class="col-md-4 blog-sidebar">
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="font-italic" style="text-align: center; padding-bottom: 0.2rem;">Topics</h4>
+                <div class="btn-group-vertical">
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Engine%20and%20Transmission'">Engine and Transmission</button>
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Brakes'">Brakes</button>
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Suspension'">Suspension</button>
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Steering'">Steering</button>
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Rollcage'">Rollcage</button>
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Journey'">Journey</button>
+                	<button class="btn btn-secondary" onclick="location.href = '/post/Miscellaneous'">Miscellaneous</button>	
+                </div>
+            </div>
+        </aside>
+	</div>
+{% endblock content %}

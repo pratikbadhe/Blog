@@ -1,0 +1,58 @@
+.blog-post {
+  margin-bottom: 4rem;
+  border-style: ridge;
+}
+
+.blog-post-title {
+  margin-bottom: .25rem;
+  font-size: 2.5rem;
+  padding-left: 2rem;
+  color: black;
+}
+.blog-post-meta {
+  margin-bottom: 1.25rem;
+  color: #999;
+  padding-left: 2rem;
+}
+.content1 {
+	padding-left: 2rem;
+}
+#blog-author{
+	color: #fff;
+	font-style: none;
+	text-decoration: none;
+}
+
+#blog-author-button{
+	border-radius: 30px;
+}
+.hide{
+	display: none;
+}
+#blog-author-button:hover + .hide{
+	display: inline-flex;
+	color: red;
+}
+#post-detail-change{
+	padding-left: 2rem;
+	
+}
+#topic{
+
+    }
+.text-right{
+	padding-right: 2rem;
+	padding-bottom: 0.5rem;
+}
+.btn-group-vertical{
+	padding-right: 1rem;
+	padding-left: 3rem;
+	
+}
+#stext-right{
+	padding-right: 2rem;
+	padding-bottom: 0.5rem;
+	text-align: right;
+	align-self: right;
+	float: right;
+}

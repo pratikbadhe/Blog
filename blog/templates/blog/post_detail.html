@@ -1,0 +1,51 @@
+{% extends "blog/base.html" %}
+{% block title %} <title>Detail</title>{% endblock %}
+{% block content %} 
+<br>
+    <div class="row ">
+    	<div class="col-md-8 blog-main"> 
+		    <div class="blog-post">
+					<h2 class="blog-post-title"><a href="{% url 'post-detail' post.id %}">{{post.title}}</a></h2>
+
+					<p class="blog-post-meta">{{post.date_posted|date:'F d, Y'}} <button class="btn btn-secondary" id="blog-author-button"><a  id="blog-author" href="{% url 'user-posts' post.author.username %}">{{ post.author }} <img class="rounded-circle" src="{{ post.author.profile.image.url }}" height="30" width="30"></a></button><span class="hide">
+						<p>{{ post_list }}</p>
+						to be completed later
+					</span>
+					</p>
+					<div class="content1">
+						<p>{{ post.content|safe }}</p>
+					</div>		    
+		    {% if object.author == user %}
+					    
+		        <span id="post-detail-change">
+			        <a class = "btn btn-secondary btn-sm mt-1 mb-1"href="{% url 'post-update' object.id %}">Update</a>
+			        <a class = "btn btn-danger btn-sm mt-1 mb-1"href="{% url 'post-delete' object.id %}">Delete</a>
+		        </span>
+		        <span id="stext-right">
+		        	<a class = "btn btn-secondary btn-sm mt-1 mb-1" id="topic-detail" href="{% url 'post-category' post.category %}">{{ post.category }}</a>
+		        </span>
+		    {% else %}
+		        <div class="text-right">
+			    <a class = "btn btn-secondary btn-sm mt-1 mb-1" id="topic" href="{% url 'post-category' post.category %}">{{ post.category }}</a>
+				</div>
+		    {% endif %}
+		    
+	        </div>
+	    </div>
+	    <aside class="col-md-4 blog-sidebar">
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="font-italic" style="text-align: center; padding-bottom: 0.2rem;">Similar</h4>
+                <p>To be done later</p>
+                <div class="btn-group-vertical">
+                	<ul>
+                        {% for post in post_list%}
+                            <li>{{ post.title }}</li>        
+                	    <button class="btn btn-secondary" href="#">{{ post.title }}</button>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </aside>    
+    </div>
+
+{% endblock content %}

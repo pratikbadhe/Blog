@@ -1,0 +1,59 @@
+{% extends "blog/base.html" %}
+{% block title %} 
+    {% for post in posts %}
+        <title>{{ post.category }} </title>
+    {% endfor %}
+   
+{% endblock %}
+{% block content %} 
+ <br>
+    <div class="row ">
+    	<div class="col-md-8 blog-main"> 
+			{% for post in posts%}
+				<div class="blog-post">
+					<h2 class="blog-post-title"><a href="{% url 'post-detail' post.id %}">{{post.title}}</a></h2>
+                    
+					<p class="blog-post-meta">{{post.date_posted|date:'F d, Y'}} <button class="btn btn-secondary" id="blog-author-button"><a  id="blog-author" href="{% url 'user-posts' post.author.username %}">{{ post.author }} <img class="rounded-circle" src="{{ post.author.profile.image.url }}" height="30" width="30"></a></button><span class="hide">
+						to be completed later
+					</span>
+					</p>
+					<div class="content1">
+						<p>{{ post.content|safe }}</p>
+					</div>
+					<div class="text-right">
+					    <a class = "btn btn-secondary btn-sm mt-1 mb-1" id="topic" href="#">{{ post.category }}</a>
+					</div>
+				    
+			    </div>
+		
+
+			{% endfor %}
+		
+			{% if is_paginated %}
+			    {% if page_obj.has_previous %}
+			        <a class = "btn btn-outline-info mb-4" href="?page=1">First</a>
+			        <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number}}">Previous</a>
+			    {% endif %}
+
+			    {% if page_obj.has_next %}
+			        <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}"  >Next</a>
+			        <a class = "btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+			    {% endif %}
+			{% endif %}
+	    </div>
+	    <aside class="col-md-4 blog-sidebar">
+            <div class="p-4 mb-3 bg-light rounded">
+                <h4 class="font-italic" style="text-align: center; padding-bottom: 0.2rem;">Topics</h4>
+                <div class="btn-group-vertical">
+                	<button class="btn btn-secondary" href="#">Engine and Transmission</button>
+                	<button class="btn btn-secondary" href="#">Brakes</button>
+                	<button class="btn btn-secondary" href="#">Suspension</button>
+                	<button class="btn btn-secondary" href="#">Steering</button>
+                	<button class="btn btn-secondary" href="#">Rollcage</button>
+                	<button class="btn btn-secondary" href="#">Journey</button>
+                	<button class="btn btn-secondary" href="#">Miscellaneous</button>	
+                </div>
+            </div>
+        </aside>
+	</div>
+{% endblock content %}
